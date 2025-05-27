@@ -1,5 +1,5 @@
 .main {
-  background: #f8f4f0;
+  background-color: var(--background, white);
   min-height: 500vh;
   height: fit-content;
   margin: 0;

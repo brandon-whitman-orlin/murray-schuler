@@ -29,7 +29,7 @@ const Z_imagebackground = () => {
         img.style.backgroundPosition = 'center';
         img.style.backgroundRepeat = 'no-repeat';
 
-        console.log(`Set background-image for ${img.src} to ${newUrl}`);
+        // console.log(`Set background-image for ${img.src} to ${newUrl}`);
       } catch (e) {
         console.warn('Could not parse image src:', img.src);
       }

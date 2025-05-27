@@ -96,6 +96,7 @@ const PolaroidScroller = ({ children }) => {
       const key = child.key ?? index;
       const isAnimating = animatingPolaroid?.key === key;
       const animationClass = isAnimating ? `animate-${animatingPolaroid.direction}` : "";
+      const isActive = index === 0; // Top polaroid is at index 0
 
       // Use fixed rotation from state
       const rotation = child.props.rotation ?? rotations[index];
@@ -106,6 +107,7 @@ const PolaroidScroller = ({ children }) => {
         key,
         stackIndex,
         rotation,
+        active: isActive,
         className: `${child.props.className ?? ""} ${animationClass}`.trim(),
         style: {
           ...(child.props.style || {}),
