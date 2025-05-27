@@ -1,26 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './Polaroid.css';
+import React from "react";
+import PropTypes from "prop-types";
+import MobileDetect from "mobile-detect";
+
+import "./Polaroid.css";
 
 import { ReactComponent as Share } from "../../assets/icons/share.svg";
 import { ReactComponent as Download } from "../../assets/icons/download.svg";
 
-
-const Polaroid = ({ text, image, rotation = 0, style = {}, className = "", active = false }) => {
+const Polaroid = ({
+  text,
+  image,
+  rotation = 0,
+  style = {},
+  className = "",
+  active = false,
+}) => {
   const combinedStyle = {
     ...style,
-    '--polaroidRotation': `${rotation}deg`,
+    "--polaroidRotation": `${rotation}deg`,
   };
 
   const combinedClassName = `polaroid ${className}`.trim();
 
   const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = image;
-    link.download = image.split('/').pop() || 'image.jpg';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const md = new MobileDetect(window.navigator.userAgent);
+
+    if (md.mobile()) {
+      // Open in new tab for manual saving on mobile
+      window.open(image, "_blank");
+    } else {
+      // Desktop download
+      const link = document.createElement("a");
+      link.href = image;
+      link.download = image.split("/").pop() || "image.jpg";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   const handleShare = async () => {
@@ -44,11 +60,19 @@ const Polaroid = ({ text, image, rotation = 0, style = {}, className = "", activ
       <img src={image} alt={text} className="polaroid-image" />
       {active ? (
         <div className="polaroid-info">
-          <button className="polaroid-icon" id="share-button" onClick={handleShare}>
+          <button
+            className="polaroid-icon"
+            id="share-button"
+            onClick={handleShare}
+          >
             <Share />
           </button>
           <div className="polaroid-caption">{text}</div>
-          <button className="polaroid-icon" id="download-button" onClick={handleDownload}>
+          <button
+            className="polaroid-icon"
+            id="download-button"
+            onClick={handleDownload}
+          >
             <Download />
           </button>
         </div>
