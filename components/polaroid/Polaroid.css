@@ -1,0 +1,32 @@
+.polaroid {
+  position: absolute;
+  width: clamp(200px, calc(200px + 10vw), 500px);
+  min-width: 200px;
+  background: var(--polaroidBackground, white);
+  padding: 1rem;
+  box-shadow: 0 1rem 1.5rem var(--shadow, rgba(0, 0, 0, 0.3));
+  cursor: pointer;
+  border-radius: var(--polaroidBorderRadius, 0.1rem);
+  transform: rotate(var(--polaroidRotation, 0deg));
+  transition: all 0.3s ease-in-out;
+  z-index: var(--polaroidZIndex, 1);
+}
+
+.polaroid-image {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.polaroid-caption {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 8px;
+  color: var(--polaroidText, black);
+}
+
+.polaroids .polaroid:hover {
+  z-index: 10;
+  transform: scale(1.05) rotate(0deg);
+}
